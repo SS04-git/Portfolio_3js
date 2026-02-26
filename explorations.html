@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Explorations — Sara Saju</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300&family=IBM+Plex+Mono:wght@300;400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/src/style.css"/>
+  <link rel="stylesheet" href="/src/responsive.css"/>
+</head>
+<body>
+
+  <canvas id="main-canvas" aria-label="Interactive 3D wireframe cube visualization" role="img"></canvas>
+  <div id="atmosphere" aria-hidden="true"></div>
+
+  <div id="site">
+
+  <!-- NAV -->
+<header id="nav">
+    <nav class="nav-inner">
+      <a href="/#intro" class="nav-logo">SS</a>
+      <div class="nav-links">
+        <a href="/#about">About</a>
+        <a href="/#work">Work</a>
+        <a href="#contact">Contact</a>
+        <a href="/assets/CV.pdf" target="_blank">Resume &#x2197;</a>
+      </div>
+    </nav>
+  </header>
+
+    <section class="exp-hero" id="exp-section-0">
+      <div class="exp-hero-inner">
+        <div class="exp-hero-left">
+          <div class="exp-eyebrow">Exploratory Work</div>
+          <h1 class="exp-heading">
+            Side<br>projects,<br>
+            <em>experiments</em><br>
+            &amp;&nbsp;curiosities.
+          </h1>
+        </div>
+        <div class="exp-hero-right">
+          <div class="exp-stat">
+            <span class="exp-stat-num">04</span>
+            <span class="exp-stat-label">Selected<br>explorations</span>
+          </div>
+          <p class="exp-desc">Work that lives outside the brief — spatial analysis, generative systems, physical computing, and design research done for the joy of making.</p>
+          <div class="exp-hint">&#x2193;&nbsp;&nbsp;scroll to explore</div>
+        </div>
+      </div>
+    </section>
+
+    <div class="exp-panels">
+      <div class="exp-panels-grid">
+
+        <a href="/lnd.html" class="exp-panel" id="exp-section-1" style="--accent:#C4731A">
+          <span class="exp-panel-ghost" aria-hidden="true">01</span>
+          <div class="exp-panel-inner">
+            <div class="exp-panel-eyebrow"><span class="exp-panel-num">01</span>Spatial Analysis</div>
+            <h2 class="exp-panel-title">Landslide<br>Factor Testing</h2>
+            <p class="exp-panel-sub">Idukki District, Kerala</p>
+            <p class="exp-panel-desc">Spatial analysis of natural and human factors contributing to landslide risk in Idukki using QGIS — mapping elevation, rainfall, land use, and proximity to fault lines to identify high-risk zones.</p>
+            <div class="exp-panel-tags">
+              <span class="exp-panel-tag">QGIS</span>
+              <span class="exp-panel-tag">Spatial Analysis</span>
+              <span class="exp-panel-tag">Raster Processing</span>
+              <span class="exp-panel-tag">GIS</span>
+            </div>
+            <span class="exp-panel-cta">View project</span>
+          </div>
+        </a>
+
+        <a href="/3d.html" class="exp-panel" id="exp-section-2" style="--accent:#DD6D9D">
+          <span class="exp-panel-ghost" aria-hidden="true">02</span>
+          <div class="exp-panel-inner">
+            <div class="exp-panel-eyebrow"><span class="exp-panel-num">02</span>Generative Art</div>
+            <h2 class="exp-panel-title">3D Interactive<br>Garden</h2>
+            <p class="exp-panel-sub">Three.js / WebGL</p>
+            <p class="exp-panel-desc">A generative 3D environment exploring procedural growth systems and interactive natural forms — organic structures that respond to cursor movement and evolve in real time.</p>
+            <div class="exp-panel-tags">
+              <span class="exp-panel-tag">Three.js</span>
+              <span class="exp-panel-tag">WebGL</span>
+              <span class="exp-panel-tag">Procedural</span>
+              <span class="exp-panel-tag">Generative</span>
+            </div>
+            <span class="exp-panel-cta">View project</span>
+          </div>
+        </a>
+
+        <a href="/ultra.html" class="exp-panel" id="exp-section-3" style="--accent:#19DAA4">
+          <span class="exp-panel-ghost" aria-hidden="true">03</span>
+          <div class="exp-panel-inner">
+            <div class="exp-panel-eyebrow"><span class="exp-panel-num">03</span>Physical Computing</div>
+            <h2 class="exp-panel-title">Ultraguide</h2>
+            <p class="exp-panel-sub">Empowering every step</p>
+            <p class="exp-panel-desc">A sensor-equipped walking stick for visually impaired users — ultrasonic obstacle detection, haptic feedback, and GPS waypointing embedded in a minimal, dignified physical form.</p>
+            <div class="exp-panel-tags">
+              <span class="exp-panel-tag">Arduino</span>
+              <span class="exp-panel-tag">Ultrasonic Sensor</span>
+              <span class="exp-panel-tag">Haptics</span>
+              <span class="exp-panel-tag">Accessibility</span>
+            </div>
+            <span class="exp-panel-cta">View project</span>
+          </div>
+        </a>
+
+        <a href="/sv.html" class="exp-panel" id="exp-section-4" style="--accent:#38C038">
+          <span class="exp-panel-ghost" aria-hidden="true">04</span>
+          <div class="exp-panel-inner">
+            <div class="exp-panel-eyebrow"><span class="exp-panel-num">04</span>UI Design</div>
+            <h2 class="exp-panel-title">Savour</h2>
+            <p class="exp-panel-sub">Sustainable Food Practices</p>
+            <p class="exp-panel-desc">A mobile-first product encouraging mindful, sustainable eating — surfacing provenance, seasonal availability, and carbon footprint at the point of meal discovery.</p>
+            <div class="exp-panel-tags">
+              <span class="exp-panel-tag">Figma</span>
+              <span class="exp-panel-tag">Mobile UI</span>
+              <span class="exp-panel-tag">Sustainability</span>
+            </div>
+            <span class="exp-panel-cta">View project</span>
+          </div>
+        </a>
+
+      </div><!-- /.exp-panels-grid -->
+    </div><!-- /.exp-panels -->
+
+    <section id="contact" class="section-contact">
+      <div class="contact-inner">
+        <div class="contact-header">
+          <span class="section-eyebrow">CONTACT</span>
+          <h2 class="contact-heading">Let&#x2019;s make<br><em>something</em><br>together.</h2>
+        </div>
+        <div class="contact-body">
+          <p class="contact-sub">Open to freelance projects, collaborations,<br>and conversations about design &amp; technology.</p>
+          <div class="contact-links">
+            <a href="/cdn-cgi/l/email-protection#ed9e8c9f8c9e8c8798ad88808c8481c38e8280" class="contact-link">
+              <span class="contact-link-label">Email</span>
+              <span class="contact-link-value"><span class="__cf_email__" data-cfemail="bbc8dac9dac8dad1cefbded6dad2d795d8d4d6">[email&#160;protected]</span> &#x2197;</span>
+            </a>
+            <a href="https://www.linkedin.com/in/sara-saju-8573692ba/" target="_blank" class="contact-link">
+              <span class="contact-link-label">LinkedIn</span>
+              <span class="contact-link-value">sara-saju &#x2197;</span>
+            </a>
+            <a href="/assets/CV.pdf" target="_blank" class="contact-link">
+              <span class="contact-link-label">Resume</span>
+              <span class="contact-link-value">Download PDF &#x2197;</span>
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="contact-footer-bar">
+        <span>Sara Saju &mdash; Designer &amp; Creative Technologist</span>
+        <span>&copy; 2025</span>
+      </div>
+    </section>
+
+  </div>
+
+  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="/src/cursor.js"></script>
+  <script src="/src/cube.js"></script>
+  <script src="/src/miniScenes.js"></script>
+  <script src="/src/main.js"></script>
+
+  <script>
+  (function () {
+    /* ── Wait for CubeAPI to be ready ── */
+    function onReady(fn) {
+      if (window.CubeAPI) { fn(); return; }
+      window.addEventListener('load', fn, { once: true });
+    }
+
+    onReady(function () {
+      /* ── 1. Cube face rotation per scroll section ── */
+      const sectionFaces = [
+        { el: document.querySelector('.exp-hero'),    face: 'intro'  },
+        { el: document.querySelector('.exp-panels'),  face: 'about'  },
+        { el: document.querySelector('#contact'),     face: 'work'   },
+      ].filter(s => s.el);
+
+      let currentFace = null;
+      const faceObserver = new IntersectionObserver(entries => {
+        entries.forEach(e => {
+          if (!e.isIntersecting) return;
+          const face = e.target._face;
+          if (face === currentFace) return;
+          currentFace = face;
+          window.CubeAPI.setCubeSection(face);
+        });
+      }, { threshold: 0.3 });
+
+      sectionFaces.forEach(({ el, face }) => {
+        el._face = face;
+        faceObserver.observe(el);
+      });
+
+      /* ── 2. Subtle skewY on the grid as it scrolls through ── */
+      const grid   = document.querySelector('.exp-panels-grid');
+      const panels = document.querySelector('.exp-panels');
+      if (!grid || !panels) return;
+
+      let isHovered   = false;
+      let currentSkew = 0, targetSkew = 0;
+
+      grid.addEventListener('mouseenter', () => { isHovered = true;  });
+      grid.addEventListener('mouseleave', () => { isHovered = false; });
+
+      function lerp(a, b, t) { return a + (b - a) * t; }
+
+      function getScrollProgress() {
+        const rect    = panels.getBoundingClientRect();
+        const vh      = window.innerHeight;
+        const elapsed = vh - rect.top;
+        return Math.max(0, Math.min(1, elapsed / (rect.height + vh)));
+      }
+
+      (function tick() {
+        requestAnimationFrame(tick);
+        targetSkew   = isHovered ? 0 : lerp(-1.2, 0.6, getScrollProgress());
+        currentSkew  = lerp(currentSkew, targetSkew, 0.05);
+        grid.style.transform = `skewY(${currentSkew.toFixed(3)}deg)`;
+      })();
+    });
+  })();
+  </script>
+
+<script src="/src/mobile-nav.js"></script>
+</body>
+</html>
