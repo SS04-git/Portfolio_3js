@@ -24,3 +24,5 @@ dist-ssr
 *.sw?
 
 .vercel
+
+node_modules
