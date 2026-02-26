@@ -1,1 +1,188 @@
-!function(){if(window.matchMedia("(pointer: coarse)").matches)return;const n=document.createElement("style");n.textContent="\n    *, *::before, *::after { cursor: none !important; }\n\n    #warp-cursor {\n      position: fixed;\n      top: 0; left: 0;\n      width: 10px; height: 10px;\n      border-radius: 50%;\n      background: var(--chrome-bright, #7ecfc8);\n      pointer-events: none;\n      z-index: 99999;\n      mix-blend-mode: difference;\n      will-change: transform;\n      transform-origin: center center;\n    }\n\n    #warp-cursor-ring {\n      position: fixed;\n      top: 0; left: 0;\n      width: 36px; height: 36px;\n      border-radius: 50%;\n      border: 1px solid rgba(126, 207, 200, 0.45);\n      pointer-events: none;\n      z-index: 99998;\n      will-change: transform;\n      transform-origin: center center;\n      transition: opacity 0.3s ease;\n    }\n\n    #warp-cursor.is-hovering {\n      background: #ffffff;\n    }\n    #warp-cursor-ring.is-hovering {\n      border-color: rgba(126, 207, 200, 0.9);\n      border-width: 1.5px;\n    }\n  ",document.head.appendChild(n);const e=document.createElement("div");e.id="warp-cursor";const t=document.createElement("div");t.id="warp-cursor-ring",document.body.appendChild(e),document.body.appendChild(t);let r,o=window.innerWidth/2,s=window.innerHeight/2,i=o,a=s,c=i,d=a,l=o,u=s,m=!1;const p="a, button, .project-card, .depth-dot, .nav-logo, .pc-cta, .contact-link, .about-tags span";let h=null;function f(n,e,t){return n+(e-n)*t}function g(n,e,t){return Math.max(e,Math.min(t,n))}window.addEventListener("mousemove",n=>{o=n.clientX,s=n.clientY},{passive:!0}),document.addEventListener("mouseover",n=>{n.target.closest(p)&&(m=!0,e.classList.add("is-hovering"),t.classList.add("is-hovering"))}),document.addEventListener("mouseout",n=>{n.target.closest(p)&&(m=!1,e.classList.remove("is-hovering"),t.classList.remove("is-hovering"))}),function n(){r=requestAnimationFrame(n);const v=m?.12:.1;c=i,d=a,i=f(i,o,v),a=f(a,s,v);const w=i-c,y=a-d,x=Math.sqrt(w*w+y*y),b=g(.22*x,0,1),L=g(1-.04*x,.85,1),E=x>.1?180*Math.atan2(y,w)/Math.PI:0,$=m?2.2:1,M=m?$:1+b,C=m?$:L;e.style.transform=`\n      translate(${i-5}px, ${a-5}px)\n      rotate(${E}deg)\n      scale(${M}, ${C})\n    `;const q=m?.09:.07;l=f(l,o,q),u=f(u,s,q);const k=m?1.6:1;t.style.transform=`translate(${l-18}px, ${u-18}px) scale(${k})`;let z=null,A=90;if(Array.from(document.querySelectorAll(p)).forEach(n=>{const e=n.getBoundingClientRect(),t=e.left+e.width/2,r=e.top+e.height/2,i=(a=o,c=s,d=t,l=r,Math.sqrt((a-d)**2+(c-l)**2));var a,c,d,l;i<A&&(A=i,z=n)}),h&&h!==z&&(h.style.transform="",h.style.transition="transform 0.4s cubic-bezier(0.25,0.46,0.45,0.94)",h=null),z){const n=z.getBoundingClientRect(),e=n.left+n.width/2,t=n.top+n.height/2,r=.28*(1-A/90),i=(o-e)*r,a=(s-t)*r;z.classList.contains("project-card")||(z.style.transition="transform 0.15s ease",z.style.transform=`translate(${i}px, ${a}px)`),h=z}}(),document.addEventListener("mouseleave",()=>{e.style.opacity="0",t.style.opacity="0"}),document.addEventListener("mouseenter",()=>{e.style.opacity="1",t.style.opacity="1"}),window.addEventListener("mousedown",()=>{e.style.transform+=" scale(0.7)",t.style.transform+=" scale(0.75)"}),window.addEventListener("mouseup",()=>{})}();
+﻿(function () {
+  if (window.matchMedia('(pointer: coarse)').matches) return;
+
+  const style = document.createElement('style');
+  style.textContent = `
+    *, *::before, *::after { cursor: none !important; }
+
+    #warp-cursor {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 10px;
+      height: 10px;
+      pointer-events: none;
+      z-index: 99999;
+      will-change: transform, opacity;
+      transform-origin: center center;
+      background: rgba(126, 207, 200, 0.95);
+      border: 1px solid rgba(126, 207, 200, 0.75);
+      box-shadow: 0 0 10px rgba(126, 207, 200, 0.5);
+      mix-blend-mode: screen;
+    }
+
+    #warp-cursor::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 2px;
+      height: 2px;
+      background: rgba(255, 255, 255, 0.9);
+      transform: translate(-50%, -50%);
+      box-shadow: 0 0 6px rgba(255, 255, 255, 0.7);
+    }
+
+    #warp-cursor-trail {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 22px;
+      height: 2px;
+      pointer-events: none;
+      z-index: 99998;
+      will-change: transform, opacity;
+      transform-origin: left center;
+      background: linear-gradient(to right, rgba(126, 207, 200, 0.35), rgba(126, 207, 200, 0));
+      filter: drop-shadow(0 0 4px rgba(126, 207, 200, 0.3));
+      opacity: 0.65;
+    }
+
+    #warp-cursor.is-hovering {
+      background: rgba(255, 255, 255, 0.95);
+      border-color: rgba(255, 255, 255, 0.85);
+      box-shadow: 0 0 12px rgba(255, 255, 255, 0.55);
+    }
+
+    #warp-cursor-trail.is-hovering {
+      background: linear-gradient(to right, rgba(255, 255, 255, 0.45), rgba(255, 255, 255, 0));
+      opacity: 0.85;
+    }
+  `;
+  document.head.appendChild(style);
+
+  const cursor = document.createElement('div');
+  cursor.id = 'warp-cursor';
+
+  const trail = document.createElement('div');
+  trail.id = 'warp-cursor-trail';
+
+  document.body.appendChild(cursor);
+  document.body.appendChild(trail);
+
+  let rafId;
+  let tx = window.innerWidth / 2;
+  let ty = window.innerHeight / 2;
+  let cx = tx;
+  let cy = ty;
+  let prevCx = cx;
+  let prevCy = cy;
+  let trailX = tx;
+  let trailY = ty;
+  let isHovering = false;
+
+  const cursorSize = 10;
+  const trailLength = 22;
+  const magnetTargets =
+    'a, button, .project-card, .depth-dot, .nav-logo, .pc-cta, .contact-link, .about-tags span';
+
+  let magnetEl = null;
+
+  const lerp = (a, b, t) => a + (b - a) * t;
+
+  window.addEventListener(
+    'mousemove',
+    (e) => {
+      tx = e.clientX;
+      ty = e.clientY;
+    },
+    { passive: true }
+  );
+
+  document.addEventListener('mouseover', (e) => {
+    if (!e.target.closest(magnetTargets)) return;
+    isHovering = true;
+    cursor.classList.add('is-hovering');
+    trail.classList.add('is-hovering');
+  });
+
+  document.addEventListener('mouseout', (e) => {
+    if (!e.target.closest(magnetTargets)) return;
+    isHovering = false;
+    cursor.classList.remove('is-hovering');
+    trail.classList.remove('is-hovering');
+  });
+
+  function animate() {
+    rafId = requestAnimationFrame(animate);
+
+    const speed = isHovering ? 0.14 : 0.1;
+    prevCx = cx;
+    prevCy = cy;
+    cx = lerp(cx, tx, speed);
+    cy = lerp(cy, ty, speed);
+
+    const dx = cx - prevCx;
+    const dy = cy - prevCy;
+    const angle = dx || dy ? (Math.atan2(dy, dx) * 180) / Math.PI : 0;
+
+    const scale = isHovering ? 1.12 : 1;
+    cursor.style.transform = `translate(${cx - cursorSize / 2}px, ${cy - cursorSize / 2}px) rotate(45deg) scale(${scale})`;
+
+    const trailSpeed = isHovering ? 0.11 : 0.08;
+    trailX = lerp(trailX, tx, trailSpeed);
+    trailY = lerp(trailY, ty, trailSpeed);
+    trail.style.transform = `translate(${trailX - 2}px, ${trailY - 1}px) rotate(${angle}deg)`;
+
+    let nearest = null;
+    let nearestDistance = 90;
+
+    Array.from(document.querySelectorAll(magnetTargets)).forEach((el) => {
+      const rect = el.getBoundingClientRect();
+      const centerX = rect.left + rect.width / 2;
+      const centerY = rect.top + rect.height / 2;
+      const distance = Math.hypot(tx - centerX, ty - centerY);
+      if (distance < nearestDistance) {
+        nearestDistance = distance;
+        nearest = el;
+      }
+    });
+
+    if (magnetEl && magnetEl !== nearest) {
+      magnetEl.style.transform = '';
+      magnetEl.style.transition = 'transform 0.4s cubic-bezier(0.25,0.46,0.45,0.94)';
+      magnetEl = null;
+    }
+
+    if (nearest) {
+      const rect = nearest.getBoundingClientRect();
+      const centerX = rect.left + rect.width / 2;
+      const centerY = rect.top + rect.height / 2;
+      const force = 0.28 * (1 - nearestDistance / 90);
+      const mx = (tx - centerX) * force;
+      const my = (ty - centerY) * force;
+
+      if (!nearest.classList.contains('project-card')) {
+        nearest.style.transition = 'transform 0.15s ease';
+        nearest.style.transform = `translate(${mx}px, ${my}px)`;
+      }
+      magnetEl = nearest;
+    }
+  }
+
+  animate();
+
+  document.addEventListener('mouseleave', () => {
+    cursor.style.opacity = '0';
+    trail.style.opacity = '0';
+  });
+
+  document.addEventListener('mouseenter', () => {
+    cursor.style.opacity = '1';
+    trail.style.opacity = isHovering ? '0.85' : '0.65';
+  });
+
+  window.addEventListener('beforeunload', () => {
+    cancelAnimationFrame(rafId);
+  });
+})();
