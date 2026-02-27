@@ -80,13 +80,15 @@
   let trailX = tx;
   let trailY = ty;
   let isHovering = false;
+  let hoverEl = null;
 
   const cursorSize = 10;
   const trailLength = 22;
+  const magnetRadius = 90;
+  const magnetReleaseRadius = 120;
+  const magnetPull = 0.22;
   const magnetTargets =
     'a, button, .project-card, .depth-dot, .nav-logo, .pc-cta, .contact-link, .about-tags span';
-
-  let magnetEl = null;
 
   const lerp = (a, b, t) => a + (b - a) * t;
 
@@ -99,28 +101,69 @@
     { passive: true }
   );
 
-  document.addEventListener('mouseover', (e) => {
-    if (!e.target.closest(magnetTargets)) return;
-    isHovering = true;
-    cursor.classList.add('is-hovering');
-    trail.classList.add('is-hovering');
-  });
+  function setHoverState(nextHovering) {
+    if (isHovering === nextHovering) return;
+    isHovering = nextHovering;
+    cursor.classList.toggle('is-hovering', isHovering);
+    trail.classList.toggle('is-hovering', isHovering);
+  }
 
-  document.addEventListener('mouseout', (e) => {
-    if (!e.target.closest(magnetTargets)) return;
-    isHovering = false;
-    cursor.classList.remove('is-hovering');
-    trail.classList.remove('is-hovering');
-  });
+  function getCenter(el) {
+    const rect = el.getBoundingClientRect();
+    return {
+      x: rect.left + rect.width / 2,
+      y: rect.top + rect.height / 2,
+    };
+  }
+
+  function distanceToEl(el, x, y) {
+    const c = getCenter(el);
+    return Math.hypot(x - c.x, y - c.y);
+  }
+
+  function getNearestMagnet(x, y) {
+    let nearest = null;
+    let nearestDistance = magnetRadius;
+    const nodes = document.querySelectorAll(magnetTargets);
+
+    nodes.forEach((el) => {
+      const d = distanceToEl(el, x, y);
+      if (d < nearestDistance) {
+        nearestDistance = d;
+        nearest = el;
+      }
+    });
+
+    return nearest;
+  }
 
   function animate() {
     rafId = requestAnimationFrame(animate);
 
-    const speed = isHovering ? 0.14 : 0.1;
+    const pointedEl = document.elementFromPoint(tx, ty);
+    const pointedInteractive = pointedEl ? pointedEl.closest(magnetTargets) : null;
+    setHoverState(Boolean(pointedInteractive));
+
+    if (hoverEl && (!document.contains(hoverEl) || distanceToEl(hoverEl, tx, ty) > magnetReleaseRadius)) {
+      hoverEl = null;
+    }
+    if (!hoverEl) {
+      hoverEl = getNearestMagnet(tx, ty);
+    }
+
+    let targetX = tx;
+    let targetY = ty;
+    if (hoverEl) {
+      const center = getCenter(hoverEl);
+      targetX = lerp(tx, center.x, magnetPull);
+      targetY = lerp(ty, center.y, magnetPull);
+    }
+
+    const speed = isHovering ? 0.18 : 0.14;
     prevCx = cx;
     prevCy = cy;
-    cx = lerp(cx, tx, speed);
-    cy = lerp(cy, ty, speed);
+    cx = lerp(cx, targetX, speed);
+    cy = lerp(cy, targetY, speed);
 
     const dx = cx - prevCx;
     const dy = cy - prevCy;
@@ -133,41 +176,6 @@
     trailX = lerp(trailX, tx, trailSpeed);
     trailY = lerp(trailY, ty, trailSpeed);
     trail.style.transform = `translate(${trailX - 2}px, ${trailY - 1}px) rotate(${angle}deg)`;
-
-    let nearest = null;
-    let nearestDistance = 90;
-
-    Array.from(document.querySelectorAll(magnetTargets)).forEach((el) => {
-      const rect = el.getBoundingClientRect();
-      const centerX = rect.left + rect.width / 2;
-      const centerY = rect.top + rect.height / 2;
-      const distance = Math.hypot(tx - centerX, ty - centerY);
-      if (distance < nearestDistance) {
-        nearestDistance = distance;
-        nearest = el;
-      }
-    });
-
-    if (magnetEl && magnetEl !== nearest) {
-      magnetEl.style.transform = '';
-      magnetEl.style.transition = 'transform 0.4s cubic-bezier(0.25,0.46,0.45,0.94)';
-      magnetEl = null;
-    }
-
-    if (nearest) {
-      const rect = nearest.getBoundingClientRect();
-      const centerX = rect.left + rect.width / 2;
-      const centerY = rect.top + rect.height / 2;
-      const force = 0.28 * (1 - nearestDistance / 90);
-      const mx = (tx - centerX) * force;
-      const my = (ty - centerY) * force;
-
-      if (!nearest.classList.contains('project-card')) {
-        nearest.style.transition = 'transform 0.15s ease';
-        nearest.style.transform = `translate(${mx}px, ${my}px)`;
-      }
-      magnetEl = nearest;
-    }
   }
 
   animate();
