@@ -45,3 +45,50 @@
   .section{padding:56px var(--inset)!important}
   .section-overview{padding:52px var(--inset)!important}
 }
+
+/* Keep graph/map previews fully visible on smaller Mac laptop screens */
+@media (min-width:1025px) and (max-width:1500px) and (max-height:950px){
+  .maps-grid{grid-template-columns:repeat(3,minmax(0,1fr))!important;align-items:stretch!important}
+  .map-item{display:flex!important;align-items:center!important;justify-content:center!important;padding:10px!important;overflow:hidden!important}
+  .map-item img{
+    width:100%!important;
+    height:auto!important;
+    max-height:min(34vh,280px)!important;
+    object-fit:contain!important;
+    object-position:center center!important;
+    background:transparent!important;
+  }
+}
+
+/* Urushya stats: keep preview images visually balanced with large text on smaller screens */
+@media (min-width:1025px) and (max-width:1500px){
+  .stat-block{
+    display:grid!important;
+    grid-template-columns:minmax(300px,52%) minmax(0,1fr)!important;
+    gap:clamp(16px,2vw,28px)!important;
+    align-items:center!important;
+  }
+  .stat-block img{
+    width:100%!important;
+    max-width:100%!important;
+    min-height:0!important;
+    max-height:min(28vh,220px)!important;
+    object-fit:contain!important;
+    object-position:center center!important;
+    justify-self:start!important;
+  }
+  .stat-block-text{
+    min-width:0!important;
+  }
+}
+
+@media (max-width:1024px){
+  .stat-block img{
+    width:min(100%,560px)!important;
+    max-width:100%!important;
+    height:auto!important;
+    max-height:300px!important;
+    justify-self:center!important;
+    margin-inline:auto!important;
+  }
+}

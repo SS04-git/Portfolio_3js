@@ -96,6 +96,8 @@
     (e) => {
       tx = e.clientX;
       ty = e.clientY;
+      cursor.style.opacity = '1';
+      trail.style.opacity = isHovering ? '0.85' : '0.65';
     },
     { passive: true }
   );
