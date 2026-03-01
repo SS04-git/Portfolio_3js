@@ -84,7 +84,6 @@
 
   const cursorSize = 10;
   const trailLength = 22;
-  const magnetRadius = 90;
   const magnetReleaseRadius = 120;
   const magnetPull = 0.22;
   const magnetTargets =
@@ -121,22 +120,6 @@
     return Math.hypot(x - c.x, y - c.y);
   }
 
-  function getNearestMagnet(x, y) {
-    let nearest = null;
-    let nearestDistance = magnetRadius;
-    const nodes = document.querySelectorAll(magnetTargets);
-
-    nodes.forEach((el) => {
-      const d = distanceToEl(el, x, y);
-      if (d < nearestDistance) {
-        nearestDistance = d;
-        nearest = el;
-      }
-    });
-
-    return nearest;
-  }
-
   function animate() {
     rafId = requestAnimationFrame(animate);
 
@@ -144,16 +127,16 @@
     const pointedInteractive = pointedEl ? pointedEl.closest(magnetTargets) : null;
     setHoverState(Boolean(pointedInteractive));
 
-    if (hoverEl && (!document.contains(hoverEl) || distanceToEl(hoverEl, tx, ty) > magnetReleaseRadius)) {
+    // Stick only to the element actually under the pointer.
+    if (pointedInteractive) {
+      hoverEl = pointedInteractive;
+    } else if (hoverEl && (!document.contains(hoverEl) || distanceToEl(hoverEl, tx, ty) > magnetReleaseRadius)) {
       hoverEl = null;
-    }
-    if (!hoverEl) {
-      hoverEl = getNearestMagnet(tx, ty);
     }
 
     let targetX = tx;
     let targetY = ty;
-    if (hoverEl) {
+    if (hoverEl && isHovering) {
       const center = getCenter(hoverEl);
       targetX = lerp(tx, center.x, magnetPull);
       targetY = lerp(ty, center.y, magnetPull);
