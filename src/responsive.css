@@ -92,3 +92,102 @@
     margin-inline:auto!important;
   }
 }
+
+@media (max-width:768px){
+  .project-card,
+  .project-card:nth-child(odd),
+  .project-card:nth-child(2n){
+    left:var(--inset)!important;
+    right:var(--inset)!important;
+    width:auto!important;
+    max-width:none!important;
+    grid-template-columns:1fr!important;
+    grid-template-areas:
+      "render"
+      "text"!important;
+    grid-template-rows:minmax(34vh,44vh) auto!important;
+    overflow:hidden!important;
+  }
+
+  .pc-render{
+    display:block!important;
+    min-height:34vh;
+    max-height:44vh;
+  }
+
+  .pc-text{
+    padding:28px var(--inset) 60px!important;
+    justify-content:flex-start!important;
+  }
+}
+
+@media (max-width:768px){
+  body:has(.section-intro) #work .cards-layer{
+    overflow-x:hidden!important;
+  }
+
+  body:has(.section-intro) #work .depth-counter{
+    display:flex!important;
+    bottom:20px!important;
+  }
+
+  body:has(.section-intro) #work .project-card,
+  body:has(.section-intro) #work .project-card:nth-child(odd),
+  body:has(.section-intro) #work .project-card:nth-child(2n){
+    left:var(--inset)!important;
+    right:var(--inset)!important;
+    width:calc(100vw - (var(--inset) * 2))!important;
+    max-width:calc(100vw - (var(--inset) * 2))!important;
+    transform:none!important;
+    box-sizing:border-box!important;
+  }
+
+  body:has(.section-intro) #work .pc-render,
+  body:has(.section-intro) #work .pc-text,
+  body:has(.section-intro) #work .pc-canvas{
+    max-width:100%!important;
+  }
+
+  body:has(.section-intro) #work .pc-desc{
+    display:none!important;
+  }
+
+  body:has(.section-intro) #work .pc-credit,
+  body:has(.section-intro) #work .pc-credit a{
+    font-size:12px!important;
+  }
+
+  body:has(.section-intro) #work .pc-text{
+    padding:28px var(--inset) 60px!important;
+  }
+}
+
+@media (max-width:768px){
+  p,a,li,button,input,textarea,select,label,figcaption,small,
+  .nav-links a,.pc-num,.pc-type,.pc-year,.pc-desc,.pc-tag,.pc-cta,
+  .hero-eyebrow,.hero-sub,.hero-meta,.hero-stat-label,
+  .section-num,.section-eyebrow,.section-aside-label,
+  .overview-body,.body-text,.listed-item-idx,.listed-item-title,
+  .listed-item-desc,.content-block-title,.content-block p,
+  .formula-label,.formula-idx,.formula-code,
+  .contact-sub,.contact-link-label,.contact-link-value,
+  .contact-footer-bar,.splash-label,.splash-descriptor,.enter-hint,
+  .about-body p,.about-tag,.exp-num,.exp-back,.exp-eyebrow,
+  .exp-stat-label,.exp-desc,.exp-hint,.exp-panel-eyebrow,
+  .exp-panel-num,.exp-panel-sub,.exp-panel-desc,.exp-panel-tag,.exp-panel-cta,
+  .pc-credit,.pc-credit a,.depth-label{
+    font-size:max(16px,1em)!important;
+  }
+
+  .nav-logo{
+    font-size:22px!important;
+  }
+
+  .hero-stat-num{
+    font-size:clamp(22px,7vw,32px)!important;
+  }
+
+  .section-num,.exp-num,.pc-num{
+    font-size:16px!important;
+  }
+}
