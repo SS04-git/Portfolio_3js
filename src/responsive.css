@@ -35,7 +35,7 @@
 
   .work-sticky-stage{height:100svh!important}
   .project-card,.project-card:nth-child(odd),.project-card:nth-child(2n){overflow:visible!important;grid-template-columns:minmax(340px,42vw) 1fr!important}
-  .pc-text{justify-content:flex-start!important;padding:84px var(--inset) 38px var(--inset)!important;overflow:auto!important;scrollbar-width:none}
+  .pc-text{justify-content:center!important;padding:84px var(--inset) 38px var(--inset)!important;overflow:auto!important;scrollbar-width:none}
   .pc-text::-webkit-scrollbar{display:none}
   .pc-desc{line-height:1.7!important}
   .pc-credit{white-space:normal!important;display:block!important;max-width:42ch!important;line-height:1.45!important}

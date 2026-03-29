@@ -18,3 +18,6 @@ body:has(.section-intro) .pc-type{color:#fff!important;opacity:1!important}
 .contact-footer-bar{color:rgba(255,255,255,.5)!important}
 
 .pc-credit{margin-top:34px;font-family:var(--mono);font-size:18px;line-height:1.35;letter-spacing:.02em;color:rgba(240,240,238,.7);white-space:nowrap;max-width:none;display:inline-flex;align-items:baseline;gap:8px}.pc-credit a{font-family:inherit;font-size:18px;color:inherit;text-decoration:underline;text-underline-offset:2px}.project-card:nth-child(2n) .pc-credit{text-align:right;margin-left:auto;justify-content:flex-end}
+
+/* Splash-only clarity: keep the entry prompt steady instead of pulsing */
+.enter-hint{animation:fadeUp .7s ease 2s forwards!important}
